@@ -5,11 +5,16 @@ and a jpeg with the same name you get only one yaml file. The script populates t
 name and the image file creation date. The rest of the yaml file is hard coded in this script
 '''
 
-import os
-from pathlib import Path
-import imghdr
+class ImageDirectory:
+    def __init__(self, directory_name, image_types):
+        import os
+        from pathlib import Path
+        import imghdr
 
-valid_image_types = ['tiff', 'jpeg']
+
+        self.folder_path = Path.home()  / directory_name
+        print(os.stat(self.folder_path))
+
 
 # Set the folder path
 folderpath = Path.home()  / 'Desktop/_Alistair/photos/scans'
