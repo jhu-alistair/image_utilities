@@ -1,4 +1,3 @@
-# trying as a module
 import os
 from pathlib import Path
 import imghdr
@@ -6,18 +5,17 @@ import datetime
 import re
 
 class ImageDirectory:
-
-    def __init__(self, directory_name):
+    def __init__(self, directory_name, new_prefix_code):
         self.image_files_attrs = {} # nested dictionary of image file names and their attributes
         self.image_names = set()    # image file names without extensions
         self.folder_path = Path.home()  / directory_name
-        self.dt_stamp = datetime.datetime.now().strftime("%Y-%m-%d") # date stamp for file renaming
+        self.new_prefix = new_prefix_code + "_" +  datetime.datetime.now().strftime("%Y-%m-%d")
+    #    self.dt_stamp = datetime.datetime.now().strftime("%Y-%m-%d") # date stamp for file renaming
         self.name_map = {} # maps current image file names (without extension) to new names
 
         try:
             # only proceed if path is valid
             assert Path.exists(self.folder_path)
-
             # create a set of the unique image file base names
             # and a set of the full image file names
             for img in os.listdir(self.folder_path):
@@ -32,20 +30,21 @@ class ImageDirectory:
                         self.image_names.add(pref)
         except AssertionError:
             print ("Error in class", self.__class__.__name__ , " -- Calling function provided an invalid path:", self.folder_path)
+            raise
 
     # iterator for list of image file names with extensions
     def image_files(self):
         for f in self.image_files_attrs.keys():
             yield f
 
-
     # replace image file names with date stamp plus counter
-    def rename_image_files(self, prefix):
-        ctr = 0
+    def rename_image_files(self):
+        ctr = self.set_ctr()
         for img in self.image_names:
             if not self.is_a_datestamp(img):
+                print(img)
                 ctr += 1
-                self.name_map[img] = prefix + "_" + self.dt_stamp + "_" + f"{ctr:04}"
+                self.name_map[img] = self.new_prefix + "_" + f"{ctr:04}"
         if self.name_map:
             for old_file_name in self.image_files():
                 old_prefix = self.image_files_attrs[old_file_name]['prefix']
@@ -53,17 +52,31 @@ class ImageDirectory:
                 if self.name_map.get(old_prefix, False):
                     new_file_name = self.name_map[old_prefix] + self.image_files_attrs[old_file_name]['suffix']
                     print(old_file_name + " => " + new_file_name)
+                    old_file_path = os.path.join(self.folder_path, old_file_name)
+                    new_file_path = os.path.join(self.folder_path, new_file_name)
+                    os.rename(old_file_path, new_file_path)
 
         else: print("There are no image files that do no already have names based on date stamp in", self.folder_path)
 
     # check that string contains a valid date in iso format
     def is_a_datestamp(self, val):
-        match_obj = re.search( r'\d{4}-\d{2}-\d{2}', val)
+        match_obj = re.search(r"(\d{4}-\d{2}-\d{2})(_\d{4})", val)
         if match_obj != None:
             try:
-                match_string = match_obj.group()
+                match_string = match_obj.group(1)
                 test_date = datetime.datetime.strptime(match_string, "%Y-%m-%d")
                 return True
             except ValueError:
                 return False
         else: return False
+
+    # set the counter to the highest number that has already been used with the new file name pattern and today's date
+    def set_ctr(self):
+        ctr_list = []
+        for f in self.image_files():
+            match_obj = re.search(re.escape(self.new_prefix) + r"(_)(\d{4})", f)
+            if match_obj != None:
+                ctr_list.append(match_obj.group(2))
+        if ctr_list:
+            return int(max(ctr_list))
+        else: return 1
