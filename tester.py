@@ -1,6 +1,4 @@
 # Test
-import image_directory as img_mod
-img = img_mod.ImageDirectory('Desktop/_Alistair/photos/scans', 'DRM04')
-
-
+import image_renamer as img_rename
+img = img_rename.ImageRenamer('Desktop/_Alistair/photos/scans', 'KFM')
 img.rename_image_files()

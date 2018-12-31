@@ -1,16 +1,32 @@
+'''
+Image Renamer
+This class reads the specified directory, identifies all image files using imghdr,
+and renames them using the specified prefix string plus a date stamp plus a 4-digit
+counter to file names like KFM_2018-12-30_0001. The file extension is not changed.
+The process is designed to be idempotent: it will not rename files that already have
+names in this format, and it checks for existing files with the specified prefix and
+today's date stamp when setting the starting value for the counter.
+
+Call it like this, specifying a directory below your user account:
+  import image_renamer as img_rename
+  img = img_rename.ImageRenamer('Desktop/photos/scans', 'KFM')
+  img.rename_image_files()
+
+Created by Alistair Morrison. 2018-12-30.
+'''
+
 import os
 from pathlib import Path
 import imghdr
 import datetime
 import re
 
-class ImageDirectory:
+class ImageRenamer:
     def __init__(self, directory_name, new_prefix_code):
         self.image_files_attrs = {} # nested dictionary of image file names and their attributes
         self.image_names = set()    # image file names without extensions
         self.folder_path = Path.home()  / directory_name
         self.new_prefix = new_prefix_code + "_" +  datetime.datetime.now().strftime("%Y-%m-%d")
-    #    self.dt_stamp = datetime.datetime.now().strftime("%Y-%m-%d") # date stamp for file renaming
         self.name_map = {} # maps current image file names (without extension) to new names
 
         try:
