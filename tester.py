@@ -1,4 +1,4 @@
 # Test
-import image_renamer as img_rename
-img = img_rename.ImageRenamer('Desktop/_Alistair/photos/scans', 'KFM')
-img.rename_image_files()
+import image_metadata_file_maker as file_mkr
+fm = file_mkr.ImageMetadataFileMaker('Desktop/_Alistair/photos/scans')
+fm.make_md_file()

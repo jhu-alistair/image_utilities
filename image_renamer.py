@@ -14,7 +14,6 @@ Call it like this, specifying a directory below your user account:
 
 Created by Alistair Morrison. 2018-12-30.
 '''
-
 import os
 from pathlib import Path
 import imghdr
@@ -22,6 +21,7 @@ import datetime
 import re
 
 class ImageRenamer:
+
     def __init__(self, directory_name, new_prefix_code):
         self.image_files_attrs = {} # nested dictionary of image file names and their attributes
         self.image_names = set()    # image file names without extensions
@@ -72,7 +72,7 @@ class ImageRenamer:
                     new_file_path = os.path.join(self.folder_path, new_file_name)
                     os.rename(old_file_path, new_file_path)
 
-        else: print("There are no image files that do no already have names based on date stamp in", self.folder_path)
+        else: print( self.__class__.__name__ , " -- There are no image files that do no already have names based on date stamp in", self.folder_path)
 
     # check that string contains a valid date in iso format
     def is_a_datestamp(self, val):
