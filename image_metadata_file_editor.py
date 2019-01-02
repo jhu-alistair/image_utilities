@@ -1,23 +1,20 @@
 '''
-ImageMetadataFileMaker
+ImageMetadataFileEditor
 
-This script walks through the specified directory, identifies image files using imghdr and
-creates a yaml side-car medatada file for unique each base name. (If you have a tiff
-and a jpeg with the same name you get only one yaml file.) The script populates the image file
-name in the first line of the yaml file as the ID. The rest of the yaml fields labels are hard-coded in the class init
+This script walks through the specified directory, identifies yaml files
+and attempts to add lines or make changes.
+
 '''
 
 import os
 from pathlib import Path
-import imghdr
 import sys
 
 class ImageMetadataFileMaker:
-    def __init__(self, directory_name, params):
+    def __init__(self, directory_name, source_type):
         self.folder_path = Path.home()  / directory_name
-        self.image_names = set()    # empty set to hold unique image file names without extensions
-        self.yaml_fields = ("Description", "Annotation", "Location", "Date", "Event", "People")
-        self.add_lines = params
+        self.yaml_files = ()
+
         try:
             # only proceed if path is valid
             assert Path.exists(self.folder_path)
@@ -40,7 +37,6 @@ class ImageMetadataFileMaker:
         for img in sorted(self.image_names):
             yield img
 
-
     def make_md_file(self):
         for fname in self.image_file_names():
             full_name = fname + ".yaml"
@@ -48,11 +44,9 @@ class ImageMetadataFileMaker:
             try:
                 with open(new_file_path,'x') as new_file:
                     new_file.write("ID: {0}\n".format(fname))
-                    for add_fld in self.add_lines:
-                        new_file.write("{0}\n".format(add_fld))
+                    new_file.write("Source Type: {0}\n".format(self.source_type))
                     for fld in self.yaml_fields:
                         new_file.write("{0}: \n".format(fld))
-                print("Writing {0}".format(full_name))
             except FileExistsError:
                 print ("Class", self.__class__.__name__ ,  "Error message: file named", fname, "already exists. Skipping file creation.")
             except:

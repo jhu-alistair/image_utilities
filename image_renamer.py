@@ -50,15 +50,15 @@ class ImageRenamer:
 
     # iterator for list of image file names with extensions
     def image_files(self):
-        for f in self.image_files_attrs.keys():
+        for f in sorted(self.image_files_attrs.keys()):
             yield f
+
 
     # replace image file names with date stamp plus counter
     def rename_image_files(self):
         ctr = self.set_ctr()
-        for img in self.image_names:
+        for img in sorted(self.image_names):
             if not self.is_a_datestamp(img):
-                print(img)
                 ctr += 1
                 self.name_map[img] = self.new_prefix + "_" + f"{ctr:04}"
         if self.name_map:
@@ -95,4 +95,4 @@ class ImageRenamer:
                 ctr_list.append(match_obj.group(2))
         if ctr_list:
             return int(max(ctr_list))
-        else: return 1
+        else: return 0
