@@ -22,11 +22,14 @@ import re
 
 class ImageRenamer:
 
-    def __init__(self, directory_name, new_prefix_code):
+    def __init__(self, directory_name, new_prefix_code = None):
         self.image_files_attrs = {} # nested dictionary of image file names and their attributes
         self.image_names = set()    # image file names without extensions
         self.folder_path = Path.home()  / directory_name
-        self.new_prefix = new_prefix_code + "_" +  datetime.datetime.now().strftime("%Y-%m-%d")
+        if new_prefix_code:
+            self.new_prefix = new_prefix_code + "_" +  datetime.datetime.now().strftime("%Y-%m-%d")
+        else:
+            self.new_prefix = datetime.datetime.now().strftime("%Y-%m-%d")
         self.name_map = {} # maps current image file names (without extension) to new names
 
         try:
@@ -52,7 +55,6 @@ class ImageRenamer:
     def image_files(self):
         for f in sorted(self.image_files_attrs.keys()):
             yield f
-
 
     # replace image file names with date stamp plus counter
     def rename_image_files(self):
