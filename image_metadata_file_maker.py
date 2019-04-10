@@ -2,7 +2,7 @@
 ImageMetadataFileMaker
 
 This script walks through the specified directory, identifies image files using imghdr and
-creates a yaml side-car medatada file for unique each base name. (If you have a tiff
+creates a yaml side-car medatada file for each unique base name. (If you have a tiff
 and a jpeg with the same name you get only one yaml file.) The script populates the image file
 name in the first line of the yaml file as the ID. The rest of the yaml fields labels are hard-coded in the class init
 '''
@@ -16,7 +16,7 @@ class ImageMetadataFileMaker:
     def __init__(self, directory_name, params):
         self.folder_path = Path.home()  / directory_name
         self.image_names = set()    # empty set to hold unique image file names without extensions
-        self.yaml_fields = ("Description", "Annotation", "Location", "Date", "Event", "People")
+    #    self.yaml_fields = ("Event", "People")
         self.add_lines = params
         try:
             # only proceed if path is valid
@@ -43,15 +43,15 @@ class ImageMetadataFileMaker:
 
     def make_md_file(self):
         for fname in self.image_file_names():
-            full_name = fname + ".yaml"
+            full_name = fname + ".txt"
             new_file_path = os.path.join(self.folder_path, full_name)
             try:
                 with open(new_file_path,'x') as new_file:
                     new_file.write("ID: {0}\n".format(fname))
                     for add_fld in self.add_lines:
                         new_file.write("{0}\n".format(add_fld))
-                    for fld in self.yaml_fields:
-                        new_file.write("{0}: \n".format(fld))
+        #            for fld in self.yaml_fields:
+        #                new_file.write("{0}: \n".format(fld))
                 print("Writing {0}".format(full_name))
             except FileExistsError:
                 print ("Class", self.__class__.__name__ ,  "Error message: file named", fname, "already exists. Skipping file creation.")
