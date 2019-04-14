@@ -1,4 +1,9 @@
 # Image file renamer
-import image_renamer as file_renamer
-fr = file_renamer.ImageRenamer ('C:/Users/craig/iCloudDrive/Photos/Originals/Scans/_To_Do/2019_03_11', 'KFM')
-fr.rename_image_files()
+from local_tools import *
+from image_renamer import ImageRenamer
+if confirm_config('path'):
+    img_path = get_config('path')
+    if confirm_config('image_prefix'):
+        prfx = get_config('image_prefix')
+        fr = ImageRenamer (img_path, prfx)
+        fr.rename_image_files()

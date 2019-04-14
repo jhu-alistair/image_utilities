@@ -34,12 +34,10 @@ class ImageMetadataFileMaker:
             print ("Error in class", self.__class__.__name__ , " -- Calling function provided an invalid path:", self.folder_path)
             raise
 
-
     # iterator for list of image file names with extensions
     def image_file_names(self):
         for img in sorted(self.image_names):
             yield img
-
 
     def make_md_file(self):
         for fname in self.image_file_names():
