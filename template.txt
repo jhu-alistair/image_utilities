@@ -1,9 +1,9 @@
-Source Type: 35mm slide
-Creator: Danger Mouse Morrison
-Developer Info: JUN 74
+Source Type: 35mm color slide
+Creator: Kay Morrison
+Developer Info: 
 Description:
 Annotation:
 Location:
-Date: 1974
+Date:
 Event:
 People:
