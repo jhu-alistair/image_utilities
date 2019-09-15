@@ -2,9 +2,11 @@
 ImageMetadataFileMaker
 
 This script walks through the specified directory, identifies image files using imghdr and
-creates a yaml side-car medatada file for each unique base name. (If you have a tiff
-and a jpeg with the same name you get only one yaml file.) The script populates the image file
-name in the first line of the yaml file as the ID. The rest of the yaml fields labels are hard-coded in the class init
+creates a side-car medatada text file for each unique base name. (If you have a tiff
+and a jpeg with the same name you get only one text file.) The script populates the image file
+name in the first line of the text file as the ID. The rest of the file
+is written from the list of lines passed in as params.
+
 '''
 
 import os
@@ -34,6 +36,7 @@ class ImageMetadataFileMaker:
             print ("Error in class", self.__class__.__name__ , " -- Calling function provided an invalid path:", self.folder_path)
             raise
 
+
     # iterator for list of image file names with extensions
     def image_file_names(self):
         for img in sorted(self.image_names):
@@ -48,8 +51,6 @@ class ImageMetadataFileMaker:
                     new_file.write("ID: {0}\n".format(fname))
                     for add_fld in self.add_lines:
                         new_file.write("{0}\n".format(add_fld))
-        #            for fld in self.yaml_fields:
-        #                new_file.write("{0}: \n".format(fld))
                 print("Writing {0}".format(full_name))
             except FileExistsError:
                 print ("Class", self.__class__.__name__ ,  "Error message: file named", fname, "already exists. Skipping file creation.")
