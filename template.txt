@@ -1,9 +1,9 @@
-Source Type: 35mm color slide half frame
+Source Type: 35mm color slide
 Creator: Kay Morrison
-Developer Info: Canon
-Description: at Jasper, 1964
+Developer Info:
+Description:
 Annotation:
-Location: Japer National Park, Alberta
-Date: 1964
+Location:
+Date:
 Event:
 People:
