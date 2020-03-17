@@ -1,9 +1,9 @@
-Source Type: 35mm color slide
+Source Type: 35mm color slide half frame
 Creator: Kay Morrison
-Developer Info:
-Description: Kay and Ross wedding.
+Developer Info: Canon
+Description: at Jasper, 1964
 Annotation:
-Location: Edmonton
-Date: 1959
-Event: Kay and Ross Wedding
+Location: Japer National Park, Alberta
+Date: 1964
+Event:
 People:
