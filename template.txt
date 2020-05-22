@@ -1,6 +1,6 @@
 Source Type: 35mm color slide
-Creator: Donald Morrison 1904
-Developer Info: GEVACOLOR
+Creator: Jane Smith
+Developer Info: Kodachrome
 Description:
 Annotation:
 Location: Scotland
