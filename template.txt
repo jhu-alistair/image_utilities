@@ -1,9 +1,9 @@
-Source Type: 35mm color slide
-Creator: Jane Smith
-Developer Info: Kodachrome
+Source Type: half-frame color slide
+Creator: Kay Morrison
+Developer Info:
 Description:
 Annotation:
-Location: Scotland
-Date: 1960
+Location:
+Date:
 Event:
 People:
