@@ -1,5 +1,6 @@
+-- Delete this line. This template is copied to make the metadata file for each image file --
 Source Type: 35mm color slide
-Creator: Donald Morrison 1904
+Creator: Jane Smith
 Developer Info: GEVACOLOR
 Description:
 Annotation:
