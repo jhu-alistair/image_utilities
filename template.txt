@@ -1,9 +1,8 @@
-Source Type: 35mm color slide
-Creator: Kay Morrison
-Developer Info:
+Source Type: Scans from Colin Nairns
+Creator: Colin Nairns
 Description:
 Annotation:
-Location:
+Location: Scotland
 Date:
 Event:
 People:
