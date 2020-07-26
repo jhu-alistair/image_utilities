@@ -1,0 +1,10 @@
+-- Delete this line. This template is copied to make the metadata file for each image file --
+Source Type: 35mm color slide
+Creator: Jane Smith
+Developer Info: GEVACOLOR
+Description:
+Annotation:
+Location: Scotland
+Date: 1960
+Event:
+People:

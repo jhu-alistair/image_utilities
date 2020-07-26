@@ -1,0 +1,4 @@
+# Provide path to the directory holding your image files
+path: /Users/username/Photos/Originals/Scans/_To_Do
+# Provide a prefix to be used in the new file names
+image_prefix: ABCD
