@@ -48,10 +48,8 @@ class ImageRenamer:
                         # build a set of unique image names
                         self.image_names.add(pref)
         except AssertionError:
-            print ("*** Image Utilities encountered an error in class",
-              self.__class__.__name__ + " ***")
-            print ("Calling function provided an invalid path for the image folder:",
-              self.folder_path)
+            print ("***", self.__class__.__name__, "encountered an error ***")
+            print ("Invalid path for the image folder:", self.folder_path)
             print()
             # raise
 
