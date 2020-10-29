@@ -33,8 +33,12 @@ class ImageMetadataFileMaker:
                         # build a set of unique image names
                         self.image_names.add(img_name)
         except AssertionError:
-            print ("Error in class", self.__class__.__name__ , " -- Calling function provided an invalid path:", self.folder_path)
-            raise
+            print ("*** Image Utilities encountered an error in class",
+              self.__class__.__name__ + " ***")
+            print ("Calling function provided an invalid path for the image folder:",
+              self.folder_path)
+            print()
+            # raise
 
 
     # iterator for list of image file names with extensions
